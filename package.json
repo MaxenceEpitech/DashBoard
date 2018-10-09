@@ -1,0 +1,29 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "A DashBoard Epitech project.",
+  "main": "main.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.2",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxenceEpitech/DashBoard.git"
+  },
+  "author": "Maxence Fourrier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxenceEpitech/DashBoard/issues"
+  },
+  "homepage": "https://github.com/MaxenceEpitech/DashBoard#readme"
+}
