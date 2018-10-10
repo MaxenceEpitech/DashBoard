@@ -1,7 +1,23 @@
-<strong>DashBoard Project</strong>
+<html>
+	<head>
+		<link href="assets/style.css" type="text/css" rel="stylesheet" />
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		type="text/css" rel="stylesheet" />
+		
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js" ></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Node and MySQL!</h1>
+			<form method="POST" action="/person">
+				<div class="form-group">
 
-<form method='get' action='\'>
-     <input name="username" id="stack0"/>
-     <input name="password" id="stack1"/>
-     <button type='submit'>Click</button>
-</form>
+					First name: <input type="text" class="form-control"  id="firstname" name="firstname" /><br />
+					Last name: <input type="text" class="form-control"  id="lastname" name="lastname" /><br />
+					Address: <textarea id="address" class="form-control"  name="address"></textarea> <br />
+				</div>
+				<input type="submit" class="btn btn-primary" value="Submit" />
+			</form>
+		</div>
+	</body>
+</html>

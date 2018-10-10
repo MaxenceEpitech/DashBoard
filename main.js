@@ -1,57 +1,33 @@
 var express = require('express');
-//var morgan = require('morgan');
-//var favicon = require('serve-favicon');
-//var mysql = require('mysql');
-//var bodyParser = require('body-parser');
+var mysql = require('mysql');
 
 var app = express();
 
-//app.use(morgan('combined'))
-//app.use(express.static(__dirname + '/public'))
-//app.use(favicon(__dirname + '/public/favicon.ico'))
-//var urlencodedParser = bodyParser.urlencoded({ extended: true });
-/*
- * app.use(function(req, res){ res.send('Hello'); });
- */
+var htmlController = require('./controllers/htmlController');
 
-/*
-app.get('/', function(req, res) {
-	res.render('index.ejs');
-	var username = req.query.username;
-	var password = req.query.password;
-	if (typeof username !== 'undefined' && username
-			&& typeof password !== 'undefined' && password) {
-		console.log('Trying Login.');
-		console.log('username = ' + username);
-		console.log('password = ' + password);
-	}
-});*/
+app.use('/assets', express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
 
-//GET method route
-app.get('/', function (req, res) {
-  res.send('GET request to the homepage');
-});
-
-// POST method route
-app.post('/', function (req, res) {
-  res.send('POST request to the homepage');
-});
-
-
-app.get('/index', function(req, res) {
-	res.setHeader('Content-Type', 'text/plain');
-	res.send('hello');
-});
-
-app.get('/etage/:etagenum/chambre', function(req, res) {
-	res.render('tmp.ejs', {
-		etage : req.params.etagenum
+app.use('/', function (req, res, next) {
+	console.log('Request Url:' + req.url);
+	
+	var con = mysql.createConnection({
+		host: "localhost",
+		user: "max",
+		password: "abcabcabc",
+		database: "dashboard"
 	});
+
+	
+/*
+ * con.query('SELECT People.ID, Firstname, Lastname, Address FROM People INNER
+ * JOIN PersonAddresses ON People.ID = PersonAddresses.PersonID INNER JOIN
+ * Addresses ON PersonAddresses.AddressID = Addresses.ID', function(err, rows) {
+ * if(err) throw err; console.log(rows); } );
+ */	
+	next();
 });
 
-app.use(function(req, res, next) {
-	res.setHeader('Content-Type', 'text/plain');
-	res.status(404).send('Page introuvable !');
-});
+htmlController(app);
 
 app.listen(8080);
