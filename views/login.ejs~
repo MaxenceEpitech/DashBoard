@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <link href="assets/style.css" type="text/css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />    
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js" ></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login</h1>
+      <form method="POST" action="/dashboard">
+        <div class="form-group">
+          Username: <input type="text" class="form-control"  id="username" name="username" /><br />
+          Password : <input type="text" class="form-control"  id="password" name="password" /><br />
+        </div>
+        <input type="submit" class="btn btn-primary" value="login" />
+      </form>
+    </div>
+  </body>
+</html>
