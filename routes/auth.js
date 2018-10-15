@@ -2,9 +2,12 @@ const express = require('express');
 const mysql = require('mysql');
 const path = require('path');
 const session = require('express-session');
+const users = require('./user.js');
 
 const router = express.Router();
 const parentDir = path.normalize(__dirname + "/..");
+
+var user;
 
 /*
         Init Session Saving
@@ -62,12 +65,23 @@ router.get('/', sessionChecker, (req, res) => {
 });
 
 /*
+            DashBoard
+ */
+router.get('/dashboard', (req, res) => {
+      const sess = req.session;
+      if (sess.username) {
+            res.render('dashboard', {widgets : users.getAllWidgets()});
+      } else {
+            res.redirect('/login');
+      }
+});
+
+/*
         Signup Route
  */
 router.route('/signup')
       .get(sessionChecker, (req, res) => {
-            res.sendFile(parentDir + '/public/signup.html');
-
+            res.render('index'); // tmp
       })
       .post((req, res) => {
             const sess = req.session;
@@ -78,7 +92,7 @@ router.route('/signup')
                   res.redirect('/signup');
                   return;
             }
-            const queryString = "INSERT INTO users (username, password) VALUES (?, ?)";
+            const queryString = "INSERT INTO users (username, password, weather) VALUES (?, ?, 0)";
             con.query(queryString, [username, password], function (error, rows, fields) {
                   if (error) {
                         res.redirect('/signup');
@@ -96,7 +110,7 @@ router.route('/signup')
  */
 router.route('/login')
       .get(sessionChecker, (req, res) => {
-            res.sendFile(parentDir + '/public/login.html');
+            res.render('login');
       })
       .post((req, res) => {
             const sess = req.session;
@@ -110,6 +124,9 @@ router.route('/login')
                         if (results.length > 0) {
                               if (results[0].password == password) {
                                     sess.username = username;
+                                    users.createUser(results);
+                                    users.printUser();
+
                                     res.redirect('/dashboard');
                                     return;
                               } else {
