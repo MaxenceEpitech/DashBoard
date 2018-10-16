@@ -2,33 +2,37 @@
 <head>
     <title>Signup Form</title>
     <link rel="stylesheet" type="text/css" href="css/signup.css">
+</head>
+
 <body>
 
-<div class="loginbox">
+<!-- NavBar Header -->
+<%- include('navbar.ejs', {user: user}); %>
 
+<div class="signup">
     <img src="img/avatar.png" class="avatar">
-    <h1>Login to dashboard</h1>
-    <form action="/signup" method="post">
-        <p>Email</p>
-        <% if (error.email) { %>
-            <p type="ko"> Unvalid email</p>
-        <% } %>
-        <input type="email" name="email" placeholder="Enter Email">
-        <p>Username</p>
-        <% if (error.username) { %>
-            <p type="ko"> Unvalid username</p>
-        <% } %>
-        <input type="text" name="username" placeholder="Enter Username">
-        <p>Password</p>
-        <% if (error.password) { %>
-            <p type="ko"> Unvalid password</p>
-        <% } %>
-        <input type="password" name="password" placeholder="Enter Password">
-        <input class="btn btn-primary" type="submit" name="" value="Sign up">
-    </form>
+    <div class="loginbox">
+        <h1>Sign Up to dashboard</h1>
+        <form action="/signup" method="post">
+            <p>Email</p>
+            <% if (error.email) { %>
+                <p type="ko"> Unvalid email</p>
+            <% } %>
+            <input type="email" name="email" placeholder="Enter Email">
+            <p>Username</p>
+            <% if (error.username) { %>
+                <p type="ko"> Unvalid username</p>
+            <% } %>
+            <input type="text" name="username" placeholder="Enter Username">
+            <p>Password</p>
+            <% if (error.password) { %>
+                <p type="ko"> Unvalid password</p>
+            <% } %>
+            <input type="password" name="password" placeholder="Enter Password">
+            <input class="btn btn-primary" type="submit" name="" value="Sign up">
+        </form>
 
-</div>
+    </div>
 
 </body>
-</head>
 </html>

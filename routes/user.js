@@ -52,6 +52,14 @@ module.exports = {
             console.log('data Get' + myUser.services[0].getData());
 
             return;
+      },
+
+      getUsername: function() {
+            return myUser.username;
+      },
+
+      getEmail: function() {
+            return myUser.email;
       }
 
 

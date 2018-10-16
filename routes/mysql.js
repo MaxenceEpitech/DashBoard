@@ -1,11 +1,6 @@
 const mysql = require('mysql');
 const emailValidator = require('email-validator');
-
-const noError = {
-      username: 0,
-      password: 0,
-      email: 0
-};
+const errorHandler = require('./errorHandler');
 
 /*
         Initializing Connection to mysql Database
@@ -31,13 +26,7 @@ con.connect(function (err) {
 module.exports = {
       signup: function (info) {
 
-            var error = {
-                  username: 0,
-                  password: 0,
-                  email: 0,
-                  mysql: 0
-            };
-
+            var error = errorHandler.createError();
             var exit = 0;
             if (!info.username || info.username.length < 4 || info.username.length > 15) {
                   console.log("Unvalid username");
@@ -66,18 +55,14 @@ module.exports = {
                         console.log("Error : mysql");
                         error.mysql = 1;
                   } else {
-                        error = noError;
+                        error = errorHandler.createError();
                   }
             });
             return (error);
       },
 
       execQuery: function (info, callback) {
-            var error = {
-                  username: 0,
-                  password: 0,
-                  mysql: 0
-            };
+            var error = errorHandler.createError();
             const queryString = "SELECT * FROM users WHERE username = ?";
             con.query(queryString, [info.username], function (err, results, fields) {
                   if (err) {
@@ -86,7 +71,7 @@ module.exports = {
                   } else {
                         if (results.length > 0) {
                               if (results[0].password == info.password) {
-                                    error = noError;
+                                    error = errorHandler.createError();
                                     callback(null, error);
                               } else {
                                     error.password = 1;

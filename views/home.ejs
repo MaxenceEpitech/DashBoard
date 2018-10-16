@@ -7,10 +7,16 @@
 <body>
 
 <!-- NavBar Header -->
-<% include nav.ejs %>
+<%- include('navbar.ejs', {user: user}); %>
+
 
 <div class="menu">
     <div class="login">
+        <% if (user) { %>
+            <h1>You are login in as : <%- user %> !</h1>
+        <% } else { %>
+            <h1>Not login for now</h1>
+        <% } %>
 
     </div>
 

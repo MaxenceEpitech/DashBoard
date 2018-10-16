@@ -7,7 +7,9 @@
 <body class="container">
 
 <!-- NavBar Header -->
-<% include nav.ejs %>
+<%- include('navbar.ejs', {user: user}); %>
+
+
 
 <div class="page-header">
     <h1>DashBoard</h1>

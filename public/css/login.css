@@ -1,44 +1,46 @@
-body{
-    margin: 0;
-    padding: 0;
-    background: url("../img/background.png");
-    background-size: cover;
-    background-position: center;
-    font-family: sans-serif;
-}
-
-.loginbox{
+.loginbox {
+    opacity: 0.85;
+    filter: alpha(opacity=50);
     width: 320px;
     height: 480px;
     background: #000;
     color: #fff;
-    opacity: 0.85;
-    filter: alpha(opacity=50);
-    top: 55%;
+    top: 50%;
     left: 50%;
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 80px 30px;
 }
 
-.avatar{
+.login {
+    width: 320px;
+    height: 480px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+}
+
+.avatar {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     position: absolute;
     top: -50px;
     left: calc(50% - 50px);
+    z-index: 2;
 }
 
-h1{
+h1 {
     margin: 0;
-    padding: 0 0 20px;
+    padding: 0 0 40px;
     text-align: center;
     font-size: 22px;
 }
 
-.loginbox p[type="ok"] {
+.loginbox p {
     color: white;
     margin: 0;
     padding: 0;
@@ -50,15 +52,15 @@ h1{
     margin: 0;
     padding: 0;
     font-weight: bold;
-}
-
-.loginbox input{
-    width: 100%;
     margin-bottom: 10px;
 }
 
-.loginbox input[type="text"], input[type="password"]
-{
+.loginbox input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], input[type="password"] {
     border: none;
     border-bottom: 1px solid #fff;
     background: transparent;
@@ -66,9 +68,10 @@ h1{
     height: 40px;
     color: #fff;
     font-size: 16px;
+    margin-bottom: 30px;
 }
-.loginbox input[type="submit"]
-{
+
+.loginbox input[type="submit"] {
     margin-top: 10px;
     border: none;
     outline: none;
@@ -78,20 +81,20 @@ h1{
     font-size: 18px;
     border-radius: 20px;
 }
-.loginbox input[type="submit"]:hover
-{
+
+.loginbox input[type="submit"]:hover {
     cursor: pointer;
     background: #00008B;
     color: #000;
 }
-.loginbox a{
+
+.loginbox a {
     text-decoration: none;
     font-size: 12px;
     line-height: 20px;
     color: darkgrey;
 }
 
-.loginbox a:hover
-{
+.loginbox a:hover {
     color: #ffc107;
 }

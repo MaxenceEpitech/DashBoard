@@ -4,18 +4,11 @@ const session = require('express-session');
 
 const users = require('./user.js');
 const database = require('./mysql.js');
+const errorHandler = require('./errorHandler');
 
 const router = express.Router();
-const parentDir = path.normalize(__dirname + "/..");
 
-var user;
-
-const noError = {
-      username: 0,
-      password: 0,
-      email: 0
-};
-var error = noError;
+var error = errorHandler.createError();
 
 /*
         Init Session Saving
@@ -52,14 +45,34 @@ router.get('/', sessionChecker, (req, res) => {
 });
 
 /*
+            Home
+ */
+router.get('/home', (req, res) => {
+      const sess = req.session;
+      if (sess.username) {
+            const username = users.getUsername();
+            res.render('home', {user: username});
+            return;
+      } else {
+            res.render('home', {user: null});
+            return;
+      }
+      res.end();
+});
+
+/*
             DashBoard
  */
 router.get('/dashboard', (req, res) => {
       const sess = req.session;
       if (sess.username) {
-            res.render('dashboard', {widgets: users.getAllWidgets()});
+            const username = users.getUsername();
+            res.render('dashboard', {widgets: users.getAllWidgets(), user: username});
+            return;
       } else {
+            error.dashboard = 1;
             res.redirect('/login');
+            return;
       }
 });
 
@@ -68,7 +81,8 @@ router.get('/dashboard', (req, res) => {
  */
 router.route('/signup')
       .get(sessionChecker, (req, res) => {
-            res.render('signup', {error: error});
+            const username = users.getUsername();
+            res.render('signup', {error: error, user: username});
       })
       .post((req, res) => {
             const sess = req.session;
@@ -76,7 +90,7 @@ router.route('/signup')
             const password = req.body.password;
             const email = req.body.email;
 
-            error = noError;
+            error = errorHandler.createError();
             const newError = database.signup(info = {username, password, email});
             if (newError.username || newError.password || newError.email) {
                   error = newError;
@@ -94,9 +108,10 @@ router.route('/signup')
  */
 router.route('/login')
       .get(sessionChecker, (req, res) => {
-            res.render('login', {error: error});
-            if (error.mysql || error.username || error.password) {
-                  error = noError;
+            const username = users.getUsername();
+            res.render('login', {error: error, user: username});
+            if (error.mysql || error.username || error.password || error.dashboard) {
+                  error = errorHandler.createError();
             }
       })
       .post((req, res) => {
@@ -104,17 +119,17 @@ router.route('/login')
             const username = req.body.username;
             const password = req.body.password;
 
-            error = noError;
+            error = errorHandler.createError();;
             database.getResult(info = {username, password}, function (err, newError) {
                   if (!err) {
                         if (newError.mysql || newError.username || newError.password) {
                               error = newError;
                               res.redirect("/login");
                         } else {
-                              error = noError;
+                              error = errorHandler.createError();;
                               sess.username = username;
                               users.createUser({username, password});
-                              users.printUser();
+                              //users.printUser();
 
                               res.redirect('/dashboard');
                         }
@@ -128,18 +143,19 @@ router.route('/login')
         Logout user
  */
 router.get('/logout', (req, res) => {
-      req.session.destroy(function (err) {
-            if (err) {
-                  console.log(err);
-            } else {
-                  res.redirect('/');
-                  return;
-            }
-      });
-});
-
-router.get('/editModule', (req, res) => {
-
+      if (req.session) {
+            req.session.destroy(function (err) {
+                  if (err) {
+                        console.log(err);
+                  } else {
+                        res.redirect('/home');
+                        return;
+                  }
+            });
+      } else {
+            error.logout = 1;
+            res.redirect('/home');
+      }
 });
 
 module.exports = router;

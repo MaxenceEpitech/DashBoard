@@ -2,27 +2,34 @@
 <head>
     <title>Login Form</title>
     <link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+
 <body>
 
-<div class="loginbox">
+<!-- NavBar Header -->
+<%- include('navbar.ejs', {user: user}); %>
 
+<div class="login">
     <img src="img/avatar.png" class="avatar">
-    <h1>Login to dashboard</h1>
-    <% if (error.username || error.password) { %>
-        <p type="ko">Wrong password or Username</p>
-    <% } %>
-    <form action="/login" method="post">
-        <p>Username</p>
-        <input type="text" name="username" placeholder="Enter Username">
-        <p>Password</p>
-        <input type="password" name="password" placeholder="Enter Password">
-        <input class="btn btn-primary" type="submit" name="" value="Sign up">
-        <a href="#">Lost your password?</a><br>
-        <a href="/signup" >Don't have an account?</a>
-    </form>
-
+    <div class="loginbox">
+        <h1>Login to dashboard</h1>
+        <% if (error.username || error.password) { %>
+            <p type="ko">Wrong password or Username</p>
+        <% } %>
+        <% if (error.dashboard) { %>
+            <p type="ko">You must LogIn First to access DashBoard !</p>
+        <% } %>
+        <form action="/login" method="post">
+            <p>Username</p>
+            <input type="text" name="username" placeholder="Enter Username">
+            <p>Password</p>
+            <input type="password" name="password" placeholder="Enter Password">
+            <input class="btn btn-primary" type="submit" name="" value="Login">
+            <a href="#">Lost your password?</a><br>
+            <a href="/signup">Don't have an account?</a>
+        </form>
+    </div>
 </div>
 
 </body>
-</head>
 </html>

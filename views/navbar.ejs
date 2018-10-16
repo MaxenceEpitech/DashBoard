@@ -1,0 +1,31 @@
+<head>
+    <meta charset="UTF-8">
+    <title>NavBar</title>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+</head>
+
+<div class="custom_padding">
+    <nav>
+        <div class="logo">Logo</div>
+
+        <ul class="menu_area">
+            <li><a href="/home">Home</a></li>
+
+            <% if (!user) { %>
+                <li><a href="/signup">Sign Up</a></li>
+            <% } %>
+
+            <% if (user) { %>
+                <li><a href="/dashboard">Dashboard</a></li>
+            <% } %>
+
+            <% if (!user) { %>
+                <li><a href="/login">Log In</a></li>
+            <% } %>
+
+            <% if (user) { %>
+                <li><a href="/logout">Log Out</a></li>
+            <% } %>
+        </ul>
+    </nav>
+</div>
