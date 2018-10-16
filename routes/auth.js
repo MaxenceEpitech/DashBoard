@@ -155,4 +155,8 @@ router.get('/logout', (req, res) => {
       });
 });
 
+router.get('/editModule', (req, res) => {
+
+});
+
 module.exports = router;

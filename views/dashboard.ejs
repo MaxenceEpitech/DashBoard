@@ -16,7 +16,7 @@
 <%if (widgets) { %>
 
     <% widgets.forEach(function(user){ %>
-        <h1>Widget Name = <%- user.widget %></h1>
+        <h1>Widget Name = <%- user.widget %></h1> <!-- tmp -->
         <%- include(user.file, {user: user}); %>
     <% }); %>
 
