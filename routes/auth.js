@@ -1,13 +1,21 @@
 const express = require('express');
-const mysql = require('mysql');
 const path = require('path');
 const session = require('express-session');
+
 const users = require('./user.js');
+const database = require('./mysql.js');
 
 const router = express.Router();
 const parentDir = path.normalize(__dirname + "/..");
 
 var user;
+
+const noError = {
+      username: 0,
+      password: 0,
+      email: 0
+};
+var error = noError;
 
 /*
         Init Session Saving
@@ -23,16 +31,6 @@ router.use(session({
 }));
 
 /*
-        Initializing Connection to mysql Database
- */
-const con = mysql.createConnection({
-      host: "localhost",
-      user: "max",
-      password: "abcabcabc",
-      database: "dashboard"
-});
-
-/*
         Check if user's session is connected
  */
 const sessionChecker = (req, res, next) => {
@@ -44,17 +42,6 @@ const sessionChecker = (req, res, next) => {
             next();
       }
 };
-
-/*
-        Connecting local connection to Database
- */
-con.connect(function (err) {
-      if (!err) {
-            console.log("Database is connected ...");
-      } else {
-            console.log("Error connecting database ...");
-      }
-});
 
 /*
         Get to Root
@@ -70,7 +57,7 @@ router.get('/', sessionChecker, (req, res) => {
 router.get('/dashboard', (req, res) => {
       const sess = req.session;
       if (sess.username) {
-            res.render('dashboard', {widgets : users.getAllWidgets()});
+            res.render('dashboard', {widgets: users.getAllWidgets()});
       } else {
             res.redirect('/login');
       }
@@ -81,28 +68,25 @@ router.get('/dashboard', (req, res) => {
  */
 router.route('/signup')
       .get(sessionChecker, (req, res) => {
-            res.render('index'); // tmp
+            res.render('signup', {error: error});
       })
       .post((req, res) => {
             const sess = req.session;
             const username = req.body.username;
             const password = req.body.password;
+            const email = req.body.email;
 
-            if (!username || !password || username.length <= 0 || password.length <= 0) {
+            error = noError;
+            const newError = database.signup(info = {username, password, email});
+            if (newError.username || newError.password || newError.email) {
+                  error = newError;
                   res.redirect('/signup');
                   return;
+            } else {
+                  sess.username = username;
+                  res.redirect('/dashboard');
+                  return;
             }
-            const queryString = "INSERT INTO users (username, password, weather) VALUES (?, ?, 0)";
-            con.query(queryString, [username, password], function (error, rows, fields) {
-                  if (error) {
-                        res.redirect('/signup');
-                        return;
-                  } else {
-                        sess.username = username;
-                        res.redirect('/dashboard');
-                        return;
-                  }
-            });
       });
 
 /*
@@ -110,33 +94,32 @@ router.route('/signup')
  */
 router.route('/login')
       .get(sessionChecker, (req, res) => {
-            res.render('login');
+            res.render('login', {error: error});
+            if (error.mysql || error.username || error.password) {
+                  error = noError;
+            }
       })
       .post((req, res) => {
             const sess = req.session;
             const username = req.body.username;
             const password = req.body.password;
-            const queryString = "SELECT * FROM users WHERE username = ?";
-            con.query(queryString, [username], function (error, results, fields) {
-                  if (error) {
-                        res.redirect("/login");
-                  } else {
-                        if (results.length > 0) {
-                              if (results[0].password == password) {
-                                    sess.username = username;
-                                    users.createUser(results);
-                                    users.printUser();
 
-                                    res.redirect('/dashboard');
-                                    return;
-                              } else {
-                                    res.redirect('/login');
-                                    return;
-                              }
+            error = noError;
+            database.getResult(info = {username, password}, function (err, newError) {
+                  if (!err) {
+                        if (newError.mysql || newError.username || newError.password) {
+                              error = newError;
+                              res.redirect("/login");
                         } else {
-                              res.redirect('/login');
-                              return;
+                              error = noError;
+                              sess.username = username;
+                              users.createUser({username, password});
+                              users.printUser();
+
+                              res.redirect('/dashboard');
                         }
+                  } else {
+                        console.log(err);
                   }
             });
       });

@@ -26,8 +26,8 @@ var myUser = {
 
 module.exports = {
       createUser: function (mysqlData) {
-            myUser.username = mysqlData[0].username;
-            myUser.password = mysqlData[0].password;
+            myUser.username = mysqlData.username;
+            myUser.password = mysqlData.password;
             return;
       },
 
