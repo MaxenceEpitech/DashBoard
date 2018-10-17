@@ -16,7 +16,7 @@ var data = {
 
       // Mandatory to work
       service: 'Weather',
-      widget: 'Presure',
+      widget: 'Pressure',
       file: 'mod_weather_presure.ejs'
 };
 
