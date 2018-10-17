@@ -16,9 +16,9 @@ var data = {
 
       // Mandatory to work
       service: 'Weather',
-      widget: 'Weather Days',
-      file: 'weather_days.ejs'
-}
+      widget: 'Temperature',
+      file: 'mod_weather_temp.ejs'
+};
 
 module.exports = {
 
@@ -32,12 +32,13 @@ module.exports = {
                   }
                   else {
                         data.temperature = currentWeather.main.temp;
+                        console.log("temp = ", currentWeather.main.temp);
                   }
             });
       },
 
       /*
-            Generic function Change Data
+                Generic function Change Data
        */
       setData: function (city) {
             data.city = city;
@@ -47,7 +48,7 @@ module.exports = {
       /*
                   Generic function getData for Front file
        */
-      getData: function () {
+      getResult: function () {
             return data;
       },
 

@@ -66,6 +66,7 @@ router.get('/home', (req, res) => {
 router.get('/dashboard', (req, res) => {
       const sess = req.session;
       if (sess.username) {
+            users.refreshAllWidgets();
             const username = users.getUsername();
             res.render('dashboard', {widgets: users.getAllWidgets(), user: username});
             return;

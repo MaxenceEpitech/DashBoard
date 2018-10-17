@@ -1,4 +1,5 @@
-var weather_days = require('./weather_days.js');
+var mod_weather_temp = require('./mod_weather_temp.js');
+var mod_weather_presure = require('./mod_weather_presure.js');
 
 var myUser = {
       username: '',
@@ -8,18 +9,18 @@ var myUser = {
       services: [
             {
                   activated: true,
-                  setRefreshRate: function(rate) {weather_days.setRefreshRate(rate)},
-                  refresh: function() {return weather_days.refresh()},
-                  getData: function() {return weather_days.getData()},
-                  setData: function(data) {weather_days.setData(data)}
+                  setRefreshRate: function(rate) {mod_weather_temp.setRefreshRate(rate)},
+                  refresh: function() {return mod_weather_temp.refresh()},
+                  getData: function() {return mod_weather_temp.getResult()},
+                  setData: function(data) {mod_weather_temp.setData(data)}
             },
 
             {
-                  activated: false,
-                  setRefreshRate: function(rate) {weather_days.setRefreshRate(rate)},
-                  refresh: function() {return weather_days.refresh()},
-                  getData: function() {return weather_days.getData()},
-                  setData: function(data) {weather_days.setData(data)}
+                  activated: true,
+                  setRefreshRate: function(rate) {mod_weather_presure.setRefreshRate(rate)},
+                  refresh: function() {return mod_weather_presure.refresh()},
+                  getData: function() {return mod_weather_presure.getResult()},
+                  setData: function(data) {mod_weather_presure.setData(data)}
             }
       ]
 };
@@ -41,6 +42,12 @@ module.exports = {
                   }
             }
             return widgets;
+      },
+
+      refreshAllWidgets: function() {
+            for (var i = 0; i < myUser.services.length; i++) {
+                  myUser.services[i].refresh();
+            }
       },
 
       printUser: function () {
