@@ -8,15 +8,27 @@
 <!-- NavBar Header -->
 <%- include('navbar.ejs', {user: user}); %>
 
+<form action="/toggle" method="post">
+    <select name="widget" size="1">
+        <% if (widgets) { %>
+            <% widgets.forEach(function(user) { %>
+                <% if (!user.activated) { %>
+                    <option> <%- user.widget %>
+                <% } %>
+            <% }); %>
+         <% } %>
+    </select>
 
-<div class="page-header">
-    <h1>DashBoard</h1>
-</div>
+    <input class="btn btn-primary" type="submit" name="" value="Add Widget">
+</form>
+
 <div class="container">
     <ul>
         <% if (widgets) { %>
-            <% widgets.forEach(function(user){ %>
-                <%- include(user.file, {user: user}); %>
+            <% widgets.forEach(function(user) { %>
+                <% if (user.activated) { %>
+                    <%- include(user.file, {user: user}); %>
+                <% } %>
             <% }); %>
         <% } %>
     </ul>

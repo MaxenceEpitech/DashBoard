@@ -15,9 +15,11 @@ var data = {
       pressure: undefined,
 
       // Mandatory to work
+      activated: true,
       service: 'Weather',
       widget: 'Pressure',
-      file: 'mod_weather_presure.ejs'
+      file: 'mod_weather_pressure.ejs',
+      edit: 'mod_weather_pressure'
 };
 
 module.exports = {
@@ -45,6 +47,7 @@ module.exports = {
             this.refresh();
       },
 
+
       /*
                   Generic function getData for Front file
        */
@@ -57,5 +60,24 @@ module.exports = {
        */
       setRefreshRate: function (newRate) {
             refreshRate = newRate;
+      },
+
+      isOn: function () {
+            return data.activated;
+      },
+
+      /*
+                  Generic function activate
+       */
+      toggle: function (name) {
+            if (name == data.widget) {
+                  if (data.activated == false) {
+                        data.activated = true;
+                  } else {
+                        data.activated = false;
+                  }
+                  return true;
+            }
+            return false;
       }
 };

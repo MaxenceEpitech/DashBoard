@@ -1,13 +1,15 @@
 <html>
 <head>
-    <title>Weather Widget temperature</title>
+    <title>Weather Widget Presure</title>
     <link rel="stylesheet" type="text/css" href="css/module.css">
 </head>
 
 <body>
-
-
-<li type="module_big">
+<!-- Page Name -->
+<li type="module_normal">
+    <form action="/tmp" method="post">
+        <button name="<%- user %>" onclick="location.href='/tmp'"><a>Edit</a></button>
+    </form>
     <h1>
         city = <%- user.city %>
     </h1>
@@ -15,8 +17,6 @@
         pressure = <%- user.pressure %>
     </h1>
     <!-- Mandatory -->
-    <button onclick="location.href='/home'"><a>Edit</a></button>
-
 </li>
 
 </body>

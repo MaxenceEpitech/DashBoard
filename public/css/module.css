@@ -10,11 +10,53 @@
     margin: 0px;
 }
 
-.container ul li[type="module"] {
+.container ul li[type="module_normal"] {
+    opacity: 0.85;
+    filter: alpha(opacity=50);
     list-style: none;
     float: left;
-    width: 20%;
+    width: 320px;
     height: 300px;
-    background: red;
+    background: black;
     margin: 40px 40px 0px 55px;
+}
+
+.container ul li[type="module_big"] {
+    opacity: 0.85;
+    filter: alpha(opacity=50);
+    list-style: none;
+    float: left;
+    width: 735px;
+    height: 300px;
+    background: black;
+    margin: 40px 40px 0px 55px;
+}
+
+.container ul li[type="module_normal"] button {
+    margin: 10px 95px;
+    padding: 15px 50px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    border: none;
+    border-radius: 15px;
+}
+
+.container ul li[type="module_big"] button {
+    margin: -65px 300px;
+    padding: 15px 50px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    border: none;
+    border-radius: 15px;
+}
+
+
+.container ul li button:hover {
+    background-color: dodgerblue;
 }
