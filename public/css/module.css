@@ -32,7 +32,7 @@
     margin: 40px 40px 0px 55px;
 }
 
-.container ul li[type="module_normal"] button {
+.container ul li[type="module_normal"] button[type="edit"] {
     margin: 10px 95px;
     padding: 15px 50px;
     font-size: 15px;
@@ -44,8 +44,8 @@
     border-radius: 15px;
 }
 
-.container ul li[type="module_big"] button {
-    margin: -65px 300px;
+.container ul li[type="module_big"] button[type="edit"] {
+    margin: 10px 300px;
     padding: 15px 50px;
     font-size: 15px;
     text-align: center;

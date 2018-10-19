@@ -63,8 +63,7 @@ router.get('/home', (req, res) => {
 /*
             DashBoard add widgets
  */
-router.route('/toggle')
-      .post((req, res) => {
+router.post('/toggle', (req, res) => {
             const widget = req.body.widget;
             if (users.toggle(widget)) {
                   console.log("REDIRECT");
@@ -73,9 +72,11 @@ router.route('/toggle')
       });
 
 
-router.post('/tmp', (req, res) => {
-      console.log({user});
-      console.log(user.city);
+router.post('/remove', (req, res) => {
+      if (users.toggle(req.body.data)) {
+            console.log("REDIRECT");
+            res.redirect('/dashboard');
+      }
 });
 
 /*

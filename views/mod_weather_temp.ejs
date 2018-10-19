@@ -8,14 +8,19 @@
 
 
 <li type="module_big">
+    <!-- Mandatory -->
+    <form action="/remove" method="post">
+        <input type="hidden" name="data" value="<%- user.widget %>">
+        <button type="edit" ><a>Remove</a></button>
+    </form>
+
+    <!-- Custom -->
     <h1>
         city = <%- user.city %>
     </h1>
     <h1>
         pressure = <%- user.pressure %>
     </h1>
-    <!-- Mandatory -->
-    <button onclick="location.href='/home'"><a>Edit</a></button>
 
 </li>
 
