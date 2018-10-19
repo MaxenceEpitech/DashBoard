@@ -60,3 +60,7 @@
 .container ul li button:hover {
     background-color: dodgerblue;
 }
+
+h1 {
+    color: white;
+}
