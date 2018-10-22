@@ -9,10 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="95e34a3f-99be-4b61-9de3-43cf68f3e69a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/public/css/module.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/mod_weather_temp.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/mod_weather_temp.ejs" afterDir="false" />
-    </list>
+    <list default="true" id="95e34a3f-99be-4b61-9de3-43cf68f3e69a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,8 +97,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/mod_weather_temp.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+            <state relative-caret-position="345">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
             </state>
           </provider>
         </entry>
@@ -350,15 +347,15 @@
       <updated>1539537024565</updated>
       <workItem from="1539537027444" duration="317000" />
       <workItem from="1539537363374" duration="11295000" />
-      <workItem from="1539553933822" duration="87439000" />
+      <workItem from="1539553933822" duration="88340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99051000" />
+    <option name="totallyTimeSpent" value="99952000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
+    <frame x="0" y="25" width="1920" height="1055" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16008538" />
@@ -632,8 +629,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/mod_weather_temp.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+        <state relative-caret-position="345">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
         </state>
       </provider>
     </entry>
